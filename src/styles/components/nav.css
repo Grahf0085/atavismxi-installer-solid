@@ -1,0 +1,103 @@
+.navContainer a {
+  border-width: 2px;
+  border-style: solid;
+  text-align: center;
+}
+
+.navLink {
+  border-radius: var(--fullround);
+  padding: var(--global-padding);
+}
+
+.navContainer {
+  display: flex;
+  grid-area: nav;
+  padding: var(--global-padding);
+}
+
+.toolLinks {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 10;
+  max-width: inherit;
+}
+
+.toolLinks a {
+  width: 50%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  border-radius: var(--fullround);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  position: fixed;
+  z-index: 10;
+  transition-duration: 500ms;
+  transition-property: left;
+  height: calc(100% - 4.8rem);
+  background: var(--secondary-color);
+  opacity: 0.95;
+  top: 4.8rem;
+  justify-content: space-evenly;
+  border-radius: var(--semiround);
+  left: 50%;
+  transform: translate(-50%, 0%);
+  padding: var(--global-padding);
+}
+
+.active {
+  background: var(--secondary-color);
+}
+
+.mobileMenuHide {
+  left: -100%;
+}
+
+@media screen and (min-width: 768px) {
+  .navContainer a:hover {
+    border-style: solid;
+  }
+
+  .navContainer a {
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-style: dashed;
+  }
+
+  .openMenuButton {
+    display: none;
+  }
+
+  .menu {
+    width: fit-content;
+    position: static;
+    background: transparent;
+    height: 100%;
+    gap: 1rem;
+    transform: translate(0%, 0%);
+  }
+
+  .navContainer {
+    justify-content: center;
+  }
+
+  .toolLinks a {
+    font-size: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .menu > a {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}

@@ -1,0 +1,53 @@
+.adventurerRow:nth-of-type(odd) {
+  background: var(--quaternary-color);
+}
+
+.adventurerRow:nth-of-type(even) {
+  background: var(--ternary-color);
+}
+
+.advImage {
+  width: 5rem;
+  height: 5rem;
+  border-radius: var(--fullround);
+}
+
+.adventurerRow {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-family: 'Kreon Variable', 'Times New Roman', Times, serif;
+  border-radius: var(--semiround);
+}
+
+.detailsLink {
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  place-items: center;
+  padding: var(--global-padding);
+}
+
+.detailsLink:hover {
+  opacity: 0.8;
+}
+
+.adventurerFigure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titleSpan {
+  display: none;
+}
+
+.adventurerLocation {
+  align-self: center;
+  justify-self: start;
+}
+
+@media screen and (min-width: 1024px) {
+  .titleSpan {
+    display: inline;
+  }
+}

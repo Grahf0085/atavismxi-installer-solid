@@ -1,0 +1,65 @@
+.authForm {
+  background: var(--background-color);
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  height: 75%;
+  width: 100%;
+}
+
+.formType {
+  border-color: var(--secondary-color);
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.formType:hover,
+.formInputsField:hover {
+  opacity: 0.8;
+}
+
+.formTypeField {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.formTypeField label {
+  padding: var(--global-padding);
+  border-radius: var(--semiround);
+}
+
+.formInputsField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.formInputsField > label {
+  display: flex;
+  flex-direction: column;
+}
+
+.activeFormType {
+  background: var(--secondary-color);
+}
+
+.formSubmit {
+  border-color: var(--secondary-color);
+  border-width: 1px;
+  border-style: solid;
+  padding: var(--global-padding);
+  border-radius: var(--semiround);
+}
+
+@media screen and (min-width: 1024px) {
+  .authForm {
+    width: 50%;
+  }
+}

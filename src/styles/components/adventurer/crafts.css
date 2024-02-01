@@ -1,0 +1,72 @@
+.craftsTitle {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  text-align: center;
+}
+
+.craftFigure {
+  background: var(--secondary-color);
+  padding: 0.5rem;
+  border-radius: var(--semiround);
+}
+
+.craftTitle {
+  background: var(--quaternary-color);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3rem;
+  width: fit-content;
+  font-size: 0.875rem;
+  border-radius: var(--fullround);
+}
+
+.craftLevel {
+  background: var(--ternary-color);
+  text-align: center;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  border-radius: var(--fullround);
+}
+
+.craftsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.craftImage {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--fullround);
+}
+
+@media screen and (min-width: 768px) {
+  .craftTitle {
+    /* width: 5rem; */
+    height: 4rem;
+  }
+
+  .craftLevel {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .craftImage {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .craftsContainer {
+    display: flex;
+  }
+}

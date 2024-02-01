@@ -1,0 +1,47 @@
+.nationFigure {
+  background: var(--quaternary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  overflow: hidden;
+  height: 3rem;
+  border-radius: var(--fullround);
+}
+
+.nationRank {
+  font-size: 1.125rem;
+  background: var(--ternary-color);
+  text-align: center;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--fullround);
+}
+
+.nationContainer {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--secondary-color);
+  padding: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  justify-content: space-evenly;
+  border-radius: var(--semiround);
+}
+
+.nationEmblem {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--semiround);
+}
+
+@media screen and (min-width: 768px) {
+  .nationContainer {
+    width: fit-content;
+  }
+}

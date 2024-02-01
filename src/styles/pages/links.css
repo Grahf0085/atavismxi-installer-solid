@@ -1,0 +1,42 @@
+.linksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.linksItem {
+  background: var(--quaternary-color);
+  padding: var(--global-padding);
+  border-radius: var(--semiround);
+}
+
+.linkTitle {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.linksItem:hover {
+  background: var(--ternary-color);
+}
+
+.linksLink {
+  display: block;
+  height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .linksContainer {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .linksContainer {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

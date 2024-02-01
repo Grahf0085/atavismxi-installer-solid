@@ -1,0 +1,27 @@
+.faceListContainer {
+  gap: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.faceListContainer > li {
+  cursor: pointer;
+}
+
+.faceListContainer > li > img {
+  width: 7.5rem;
+  border-radius: var(--fullround);
+}
+
+.faceListItem {
+  border-radius: var(--semiround);
+  padding: var(--global-padding);
+}
+
+@media screen and (min-width: 768px) {
+  .faceListContainer > li > img {
+    width: 15rem;
+  }
+}

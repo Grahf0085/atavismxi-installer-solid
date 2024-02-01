@@ -1,8 +1,8 @@
 {
   "build": {
-    "beforeDevCommand": "npm run dev",
+    "beforeDevCommand": "npm run dev -- --host=localhost.atavismxi.com",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
+    "devPath": "http://localhost.atavismxi.com:4321",
     "distDir": "../dist"
   },
   "package": {
@@ -15,12 +15,47 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "process": {
+        "all": true
+      },
+      "os": {
+        "all": true
+      },
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": ["https://www.atavismxi.com/**"]
+      },
+      "dialog": {
+        "all": false,
+        "ask": false,
+        "confirm": false,
+        "message": false,
+        "open": true,
+        "save": false
+      },
+      "fs": {
+        "all": false,
+        "readFile": false,
+        "writeFile": false,
+        "readDir": false,
+        "copyFile": false,
+        "createDir": true,
+        "removeDir": false,
+        "removeFile": false,
+        "renameFile": false,
+        "exists": true,
+        "scope": ["$HOME/**"]
       }
     },
     "bundle": {
+      "appimage": {
+        "bundleMediaFramework": true
+      },
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "com.atavismxi.dev",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",

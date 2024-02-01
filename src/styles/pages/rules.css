@@ -1,0 +1,33 @@
+.rulesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.rulesItem {
+  list-style: decimal;
+  list-style-position: inside;
+  border-radius: var(--semiround);
+  padding: var(--global-padding);
+}
+
+.rulesItem:nth-child(odd) {
+  background: var(--quaternary-color);
+}
+
+.rulesItem:nth-child(even) {
+  background: var(--ternary-color);
+}
+
+@media screen and (max-width: 768px) {
+  .ruleLabel {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

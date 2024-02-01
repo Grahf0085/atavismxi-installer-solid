@@ -1,0 +1,115 @@
+.equipmentTitle {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  text-align: center;
+  place-self: center;
+  grid-area: equipTitle;
+}
+
+.equipmentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.3fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    'equipTitle equipTitle equipTitle equipTitle'
+    'eq-0 eq-1 eq-2 eq-3'
+    'eq-4 eq-9 eq-11 eq-12'
+    'eq-5 eq-6 eq-13 eq-14'
+    'eq-15 eq-10 eq-7 eq-8';
+  gap: 0.5rem;
+  width: 100%;
+  background: var(--secondary-color);
+  padding: 0.5rem;
+  border-radius: var(--semiround);
+}
+
+.equipmentGrid div {
+  background: var(--ternary-color);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--semiround);
+}
+
+.equip-slot-0 {
+  grid-area: eq-0;
+}
+
+.equip-slot-1 {
+  grid-area: eq-1;
+}
+
+.equip-slot-2 {
+  grid-area: eq-2;
+}
+
+.equip-slot-3 {
+  grid-area: eq-3;
+}
+
+.equip-slot-4 {
+  grid-area: eq-4;
+}
+
+.equip-slot-5 {
+  grid-area: eq-5;
+}
+
+.equip-slot-6 {
+  grid-area: eq-6;
+}
+
+.equip-slot-7 {
+  grid-area: eq-7;
+}
+
+.equip-slot-8 {
+  grid-area: eq-8;
+}
+
+.equip-slot-9 {
+  grid-area: eq-9;
+}
+
+.equip-slot-10 {
+  grid-area: eq-10;
+}
+
+.equip-slot-11 {
+  grid-area: eq-11;
+}
+
+.equip-slot-12 {
+  grid-area: eq-12;
+}
+
+.equip-slot-13 {
+  grid-area: eq-13;
+}
+
+.equip-slot-14 {
+  grid-area: eq-14;
+}
+
+.equip-slot-15 {
+  grid-area: eq-15;
+}
+
+.equip-slot-16 {
+  grid-area: eq-16;
+}
+
+@media screen and (min-width: 768px) {
+  .equipmentGrid div {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .equipmentGrid {
+    position: relative;
+  }
+}

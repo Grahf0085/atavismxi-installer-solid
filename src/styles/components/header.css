@@ -1,0 +1,30 @@
+header {
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--fullround);
+}
+
+.headerTitle {
+  font-size: 3rem;
+  color: var(--text-color);
+}
+
+.headerTransparent {
+  background: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .openMenubutton,
+  .closeMenuButton {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    background: var(--secondary-color);
+    place-items: center;
+  }
+}

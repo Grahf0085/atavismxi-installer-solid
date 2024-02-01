@@ -1,0 +1,13 @@
+.lostBackground {
+  background-image: url(../../assets/images/nomap.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  border-radius: var(--semiround);
+}
+
+.lostTitle {
+  font-size: 2.25rem;
+  text-align: center;
+}

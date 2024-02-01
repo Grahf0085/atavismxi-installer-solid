@@ -1,0 +1,43 @@
+.itemImage {
+  width: 3rem;
+  height: 3rem;
+}
+
+.itemFigure {
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  background: var(--quaternary-color);
+  border-radius: var(--semiround);
+  padding: 1rem;
+  width: 23rem;
+  z-index: 10;
+}
+
+.itemFigcaption p {
+  line-height: 1.2rem;
+}
+
+.itemDescription {
+  white-space: pre;
+}
+
+@media screen and (min-width: 1024px) {
+  .itemImage {
+    width: 3.3rem;
+    height: 3.3rem;
+  }
+
+  .itemFigure {
+    bottom: 6rem;
+    left: 2rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .itemFigure {
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

@@ -1,0 +1,62 @@
+.jobsTitle {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  text-align: center;
+}
+
+.jobsFigure {
+  background: var(--secondary-color);
+  padding: 0.5rem;
+  border-radius: var(--semiround);
+}
+
+.jobTitle {
+  background: var(--quaternary-color);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  height: 3rem;
+  font-size: 0.875rem;
+  border-radius: var(--fullround);
+}
+
+.jobLevel {
+  background: var(--ternary-color);
+  text-align: center;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  border-radius: var(--fullround);
+}
+
+.jobsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .jobTitle {
+    height: 4rem;
+    width: 8rem;
+    justify-content: space-between;
+  }
+
+  .jobLevel {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .jobsContainer {
+    display: flex;
+    justify-content: space-around;
+  }
+}

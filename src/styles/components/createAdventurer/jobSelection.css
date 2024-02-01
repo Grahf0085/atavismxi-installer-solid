@@ -1,0 +1,52 @@
+.jobImage {
+  width: 5rem;
+  float: left;
+  shape-outside: ellipse(50% 50%);
+  margin-right: 1rem;
+}
+
+.jobsListContainer {
+  display: grid;
+  grid-template-columns: 85% 80% 80% 80% 80% 85%;
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+}
+
+.jobsListContainer > li {
+  scroll-snap-align: center;
+  cursor: pointer;
+  border-radius: var(--semiround);
+}
+
+.jobFigure {
+  padding: 1rem;
+}
+
+.jobFigure > figcaption {
+  background: var(--quaternary-color);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 1.5rem;
+  overflow-y: scroll;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .jobsListContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .jobFigure > figcaption {
+    padding: 1rem;
+  }
+
+  .jobsListContainer > li {
+    width: 30%;
+  }
+}

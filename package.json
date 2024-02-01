@@ -12,12 +12,23 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@felte/solid": "^1.2.13",
+    "@fontsource-variable/el-messiri": "^5.0.8",
+    "@fontsource-variable/kreon": "^5.0.8",
+    "@solidjs/router": "^0.10.10",
+    "@tauri-apps/api": "^1.5.2",
+    "@thisbeyond/solid-select": "^0.14.0",
+    "lucide-solid": "^0.317.0",
     "solid-js": "^1.7.8",
-    "@tauri-apps/api": "^1.5.2"
+    "solid-transition-group": "^0.2.3",
+    "tauri-plugin-fs-watch-api": "github:tauri-apps/tauri-plugin-fs-watch#v1",
+    "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#v1",
+    "tauri-plugin-upload-api": "github:tauri-apps/tauri-plugin-upload#v1"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^1.5.8",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "vite": "^5.0.0",
-    "vite-plugin-solid": "^2.8.0",
-    "@tauri-apps/cli": "^1.5.8"
+    "vite-plugin-solid": "^2.8.0"
   }
 }

@@ -1,0 +1,35 @@
+.raceListContainer {
+  display: grid;
+  grid-template-columns: 85% 80% 80% 80% 85%;
+  overflow-x: auto;
+  width: fit-content;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+}
+
+.raceListContainer > li {
+  scroll-snap-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.raceListContainer > li > img {
+  width: 15rem;
+}
+
+.raceDesc {
+  text-align: center;
+}
+
+.raceListItem {
+  border-radius: var(--semiround);
+  padding: var(--global-padding);
+}
+
+@media screen and (min-width: 768px) {
+  .raceListContainer {
+    display: flex;
+  }
+}

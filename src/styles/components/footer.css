@@ -1,0 +1,26 @@
+footer {
+  grid-area: footer;
+  margin-top: 1.5rem;
+  background: transparent;
+  padding: var(--global-padding);
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.footerParagraph {
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+footer span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}

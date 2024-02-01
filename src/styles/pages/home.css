@@ -1,0 +1,71 @@
+.landingVideo {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.siteTitle {
+  font-size: 3.7rem;
+  background: white;
+  color: black;
+  mix-blend-mode: screen;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  line-height: 1;
+  border-radius: var(--fullround);
+  white-space: nowrap;
+}
+
+.madmen {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.subTitle {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+@media screen and (min-width: 768px) {
+  .siteTitle {
+    font-size: 5.5rem;
+  }
+
+  .madmen {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .subTitle {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .siteTitle {
+    font-size: 8rem;
+  }
+
+  .madmen {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .subTitle {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}

@@ -1,0 +1,34 @@
+.sizeListContainer {
+  gap: 1rem;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+.sizeListContainer > li {
+  display: flex;
+  justify-content: center;
+}
+
+.sizeTitle {
+  margin-bottom: 0 !important;
+}
+
+.sizeDisclaimer {
+  font-size: 1rem;
+  line-height: 1rem;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sizeListItem {
+  border-radius: var(--semiround);
+  padding: var(--global-padding);
+}
+
+@media screen and (min-width: 768px) {
+  .sizeDisclaimer {
+    line-height: 0rem;
+  }
+}

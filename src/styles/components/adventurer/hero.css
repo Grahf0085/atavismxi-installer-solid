@@ -1,0 +1,24 @@
+.heroTitle {
+  display: inline;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.profileHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--secondary-color);
+  border-radius: var(--semiround);
+}
+
+.adventurerImage {
+  width: 7rem;
+  height: 7rem;
+  border-radius: var(--fullround);
+}
+
+.titleSpan {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}

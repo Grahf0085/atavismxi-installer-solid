@@ -1,8 +1,16 @@
-import { defineConfig } from "vite";
-import solid from "vite-plugin-solid";
+import { defineConfig } from 'vite'
+import solid from 'vite-plugin-solid'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
+  vite: {
+    plugins: [basicSsl()],
+
+    server: {
+      https: true,
+    },
+  },
   plugins: [solid()],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
@@ -11,11 +19,11 @@ export default defineConfig(async () => ({
   clearScreen: false,
   // 2. tauri expects a fixed port, fail if that port is not available
   server: {
-    port: 1420,
+    port: 4321,
     strictPort: true,
     watch: {
       // 3. tell vite to ignore watching `src-tauri`
-      ignored: ["**/src-tauri/**"],
+      ignored: ['**/src-tauri/**'],
     },
   },
-}));
+}))

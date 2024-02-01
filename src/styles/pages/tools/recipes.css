@@ -1,0 +1,117 @@
+/* --------------- */
+/* Form Styles */
+/* --------------- */
+.recipesLabel {
+  display: flex;
+  flex-direction: column;
+}
+
+.firstRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.selectContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 5;
+}
+
+.craftContainer {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.recipesButtonContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.recipesButtonContainer > button {
+  border-color: var(--secondary-color);
+  border-width: 1px;
+  border-style: solid;
+  width: 50%;
+  padding: var(--global-padding);
+  border-radius: var(--semiround);
+}
+
+/* --------------- */
+/* TABLE STYLES */
+/* --------------- */
+
+table {
+  background: var(--quaternary-color);
+  border-collapse: collapse;
+  position: relative;
+}
+
+th,
+td {
+  padding: 1rem;
+}
+
+th {
+  text-align: left;
+  position: sticky;
+  top: 0px;
+  background: var(--secondary-color);
+}
+
+tr:nth-of-type(2n) {
+  background: var(--ternary-color);
+}
+
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  border-radius: var(--semiround);
+}
+
+@media screen and (max-width: 1024px) {
+  th {
+    display: none;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    align-items: center;
+    border-bottom: var(--background-color) 1px solid;
+  }
+
+  td:first-child {
+    padding-top: 1rem;
+  }
+
+  td:last-child {
+    padding-bottom: 1rem;
+  }
+
+  td::before {
+    content: attr(data-th) ': ';
+    font-weight: 700;
+  }
+
+  .firstRow input {
+    text-align: center;
+  }
+
+  .firstRow > label {
+    width: 5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .craftContainer {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .firstRow {
+    flex-direction: column;
+  }
+}

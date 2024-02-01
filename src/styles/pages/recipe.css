@@ -1,0 +1,18 @@
+.ingredientItem,
+.skillItem {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .ingredientContainer,
+  .skilzContainer {
+    text-align: end;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ingredientItem,
+  .skillItem {
+    white-space: nowrap;
+  }
+}

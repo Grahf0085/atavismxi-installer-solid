@@ -1,0 +1,22 @@
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .detailsContainer {
+    height: 100%;
+  }
+
+  .infoContainer {
+    flex-direction: row;
+    flex-grow: 1;
+  }
+}

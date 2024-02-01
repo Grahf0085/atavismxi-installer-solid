@@ -1,0 +1,32 @@
+.aboutTitle {
+  display: inline;
+  font-size: 1.25rem;
+}
+
+.summary {
+  cursor: pointer;
+  list-style: none; /* Remove default list-style (marker) */
+  display: flex;
+  justify-content: space-between;
+  border-radius: var(--semiround);
+  padding: var(--global-padding);
+}
+
+summary::-webkit-details-marker {
+  display: none; /* Hide the default arrow in WebKit browsers (Safari, Chrome) */
+}
+
+.aboutDetails {
+  background: var(--quaternary-color);
+  width: 100%;
+  height: fit-content;
+  border-radius: var(--semiround);
+}
+
+.summary:hover {
+  background: var(--ternary-color);
+}
+
+.aboutDetails p {
+  padding: var(--global-padding);
+}

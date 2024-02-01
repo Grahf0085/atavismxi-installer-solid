@@ -1,0 +1,21 @@
+.themeButton {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-width: 2px;
+  border-style: solid;
+  display: flex;
+  justify-content: center;
+  border-radius: var(--fullround);
+}
+
+@media screen and (min-width: 768px) {
+  .themeButton {
+    border-style: dashed;
+  }
+
+  button:hover {
+    border-style: solid;
+  }
+}

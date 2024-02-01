@@ -1,0 +1,42 @@
+.supportList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.supportTitle {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.supportItem {
+  display: flex;
+  height: 100%;
+}
+
+.supportItemTitle {
+  font-size: 1.25rem;
+  background: var(--quaternary-color);
+  border-radius: 1.5rem 0px 0px 1.5rem;
+  min-width: fit-content;
+  padding: var(--global-padding);
+}
+
+.supportItemText {
+  background: var(--ternary-color);
+  border-radius: 0px 1.5rem 1.5rem 0px;
+  width: 100%;
+  padding: var(--global-padding);
+}
+
+@media screen and (min-width: 768px) {
+  .supportTitle {
+    min-width: fit-content;
+  }
+
+  .supportItem {
+    height: fit-content;
+  }
+}

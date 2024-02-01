@@ -1,0 +1,36 @@
+.playerAdventurersTitle {
+  font-size: 1.875rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.logoutButton {
+  border-color: var(--secondary-color);
+  border-width: 1px;
+  border-style: solid;
+  width: 100%;
+  padding: var(--global-padding);
+  border-radius: var(--fullround);
+}
+
+.adventurerRow {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.playerButtonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .adventurerRow {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  .playerButtonContainer {
+    flex-direction: row;
+    margin-left: 1rem;
+  }
+}
