@@ -3,6 +3,8 @@
   border-width: 1px;
   border-style: solid;
   width: 100%;
+  border-radius: var(--fullround);
+  padding: var(--global-padding);
 }
 
 .loaderContainer {
@@ -13,9 +15,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: var(--fullround);
 }
 
-.lucide-loader-2 {
+.lucideLoader {
   animation: spin 1s linear infinite;
 }
 

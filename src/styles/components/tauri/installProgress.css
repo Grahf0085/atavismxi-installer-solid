@@ -1,0 +1,25 @@
+.progress-bar {
+  border-color: var(--secondary-color);
+  border-width: 1px;
+  border-style: solid;
+  height: 56px;
+  width: 100%;
+  position: relative;
+  border-radius: var(--fullround);
+}
+
+.progress-bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--secondary-color);
+  width: 0%; /* Starts at 0%, updates with download progress */
+  transition: width 30ms ease-in-out;
+  border-radius: var(--fullround);
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
