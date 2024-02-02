@@ -70,7 +70,7 @@
     "updater": {
       "active": true,
       "endpoints": [
-        "https://releases.myapp.com/{{target}}/{{arch}}/{{current_version}}"
+        "https://gist.githubusercontent.com/Grahf0085/a8e43cc36f72a2bb30397c931440eb97/raw/"
       ],
       "dialog": false,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEYyNTg5Q0UwODI3MTkwOTAKUldTUWtIR0M0SnhZOGpvZkh6NmZMQ0ZwRjBaalNLdlAwMUp3YUY5UUJ4cXdmaHdUWjhLWGpCankK",
