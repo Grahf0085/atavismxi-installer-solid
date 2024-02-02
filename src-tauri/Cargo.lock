@@ -2191,6 +2191,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6877bb514081ee2a7ff5ef9de3281f14a4dd4bceac4c09388074a6b5df8a139a"
 
 [[package]]
+name = "minisign-verify"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "933dca44d65cdd53b355d0b73d380a2ff5da71f87f036053188bf1eab6a19881"
+
+[[package]]
 name = "miniz_oxide"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3815,6 +3821,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fd27c04b9543776a972c86ccf70660b517ecabbeced9fb58d8b961a13ad129af"
 dependencies = [
  "anyhow",
+ "base64 0.21.7",
  "bytes",
  "cocoa",
  "dirs-next",
@@ -3828,6 +3835,7 @@ dependencies = [
  "heck 0.4.1",
  "http",
  "ignore",
+ "minisign-verify",
  "objc",
  "once_cell",
  "open",
@@ -3852,12 +3860,14 @@ dependencies = [
  "tauri-utils",
  "tempfile",
  "thiserror",
+ "time",
  "tokio",
  "url",
  "uuid",
  "webkit2gtk",
  "webview2-com",
  "windows 0.39.0",
+ "zip",
 ]
 
 [[package]]

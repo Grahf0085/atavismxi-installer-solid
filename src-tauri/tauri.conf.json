@@ -73,7 +73,7 @@
         "https://releases.myapp.com/{{target}}/{{arch}}/{{current_version}}"
       ],
       "dialog": false,
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEIzMkQ0NjQ0MzZGMTVENkIKUldSclhmRTJSRVl0czcvZ29CeTUza1JIbTYrb21GOThsY2xGdmUyYkNhMG94U2pTQzcrVTZMMHQK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEYyNTg5Q0UwODI3MTkwOTAKUldTUWtIR0M0SnhZOGpvZkh6NmZMQ0ZwRjBaalNLdlAwMUp3YUY5UUJ4cXdmaHdUWjhLWGpCankK",
       "windows": {
         "installMode": "passive"
       }
