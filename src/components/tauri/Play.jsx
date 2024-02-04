@@ -17,8 +17,9 @@ export function Play(props) {
     const cliPath = installedDir + GAME_FOLDER + '/Ashita-cli.exe'
     const cliExists = await exists(cliPath)
 
-    if (!cliExists)
+    if (!cliExists && !props.errors.includes("Can't Locate Ashita-cli.exe")) {
       props.setErrors([...props.errors, "Can't Locate Ashita-cli.exe"])
+    }
     if (cliExists)
       props.setErrors(
         props.errors.filter((error) => error !== "Can't Locate Ashita-cli.exe"),
@@ -29,7 +30,7 @@ export function Play(props) {
 
   const checkForWine = async () => {
     const isWineInstalled = await invoke('is_wine_installed')
-    if (!isWineInstalled)
+    if (!isWineInstalled && !props.errors.includes('Please Install Wine'))
       props.setErrors([...props.errors, 'Please Install Wine'])
     if (isWineInstalled)
       props.setErrors(
