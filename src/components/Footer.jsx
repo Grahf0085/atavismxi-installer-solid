@@ -1,8 +1,17 @@
+import { createSignal, onMount } from 'solid-js'
+import { getVersion } from '@tauri-apps/api/app'
 import Gitlab from '../../node_modules/lucide-solid/dist/source/icons/gitlab'
 import Cloud from '../../node_modules/lucide-solid/dist/source/icons/cloud'
 import '../styles/components/footer.css'
 
 export function Footer() {
+  const [appVersion, setAppVersion] = createSignal()
+
+  onMount(async () => {
+    const appVersion = await getVersion()
+    setAppVersion(appVersion)
+  })
+
   return (
     <footer>
       <div class='footerContainer'>
@@ -41,11 +50,11 @@ export function Footer() {
         </a>
       </div>
       <p class='footerParagraph'>
-        All FINAL FANTASY XI content and images ©2002-2023 SQUARE ENIX CO.,
-        LTD. FINAL FANTASY® is a registered trademark of SQUARE ENIX CO., LTD.
-        I am not staff are not affiliated with SQUARE ENIX CO., LTD. and have no
-        ownership over any FINAL FANTASY XI content and images. All rights
-        reserved.
+        Launcher Version: {appVersion()} All FINAL FANTASY XI content and images
+        ©2002-2023 SQUARE ENIX CO., LTD. FINAL FANTASY® is a registered
+        trademark of SQUARE ENIX CO., LTD. I am not staff are not affiliated
+        with SQUARE ENIX CO., LTD. and have no ownership over any FINAL FANTASY
+        XI content and images. All rights reserved.
       </p>
     </footer>
   )
