@@ -6,10 +6,6 @@ import { downloadGame } from '../../../utils/install/downloadGame'
 import { unzipGame } from '../../../utils/install/unzipGame'
 import '../../styles/components/tauri/install.css'
 
-//progress bar issues including after games unzipped and waiting for window to reload
-/* do I need window.location with solidJS */
-/* I now display the step value - check it */
-
 export function Install() {
   const [downloadPercent, setDownloadPercent] = createSignal(0)
   const [unzipPercent, setUnzipPercent] = createSignal(0)
@@ -33,9 +29,6 @@ export function Install() {
       console.error('Error During Installation: ', error)
       setError(error)
     }
-
-    //reloading to get checkForCli function in Play.jsx to work
-    /* window.location.reload(true) */
   }
 
   onMount(() => {
