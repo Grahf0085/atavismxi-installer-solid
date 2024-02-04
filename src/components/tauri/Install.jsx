@@ -24,6 +24,7 @@ export function Install() {
         setLoading(true)
         await downloadGame()
         await unzipGame()
+        window.location.reload(true)
       }
     } catch (error) {
       console.error('Error During Installation: ', error)

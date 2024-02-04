@@ -10,6 +10,7 @@ export function Play(props) {
   const store = new Store('.settings.dat')
 
   const [currentOs, setCurrentOs] = createSignal()
+  const [isInstalled, setIsInstalled] = createSignal(false)
 
   const checkForCli = async () => {
     const installedDir = await store.get('atavismxi-dir')
@@ -59,10 +60,15 @@ export function Play(props) {
     setCurrentOs(osType)
 
     if (osType === 'Linux') await checkForWine()
+
+    const installedDir = await store.get('atavismxi-dir')
+    const installedDirExists = await exists(installedDir + GAME_FOLDER)
+
+    if (installedDirExists) setIsInstalled(true)
   })
 
   return (
-    <Show when={currentOs() === 'Linux'}>
+    <Show when={currentOs() === 'Linux' && isInstalled()}>
       <button onClick={runGame} class='playButton'>
         Play Atavism XI
       </button>
