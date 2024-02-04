@@ -1,0 +1,8 @@
+.updateButton {
+  border-color: var(--secondary-color);
+  border-width: 1px;
+  border-style: solid;
+  width: 100%;
+  border-radius: var(--fullround);
+  padding: var(--global-padding);
+}

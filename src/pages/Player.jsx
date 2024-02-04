@@ -3,7 +3,7 @@ import { useNavigate } from '@solidjs/router'
 import { Adventurer } from '../components/adventurer/Adventurer'
 import { Install } from '../components/tauri/Install'
 import { Play } from '../components/tauri/Play'
-/* import Update from './tauri/Update' */
+import { Update } from '../components/tauri/Update'
 import { fetchPlayerAdventurers } from '../../utils/search'
 import { getPlayer } from '../../utils/auth'
 import '../styles/pages/player.css'
@@ -81,7 +81,7 @@ export function Player() {
       </Show>
       <div class='playerButtonContainer'>
         <Install />
-        {/* <Update /> */}
+        <Update />
         <Play
           playerName={playerName()}
           errors={errors()}
