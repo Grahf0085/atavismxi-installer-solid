@@ -80,8 +80,8 @@ export function Player() {
         </ul>
       </Show>
       <div class='playerButtonContainer'>
-        <Install />
-        <Update />
+        <Install setErrors={setErrors} />
+        <Update setErrors={setErrors} />
         <Play
           playerName={playerName()}
           errors={errors()}

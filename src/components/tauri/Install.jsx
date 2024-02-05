@@ -9,7 +9,6 @@ import '../../styles/components/tauri/install.css'
 export function Install() {
   const [downloadPercent, setDownloadPercent] = createSignal(0)
   const [unzipPercent, setUnzipPercent] = createSignal(0)
-  const [error, setError] = createSignal()
   const [loading, setLoading] = createSignal(false)
 
   const storageEventListener = () => {
@@ -27,7 +26,7 @@ export function Install() {
       }
     } catch (error) {
       console.error('Error During Installation: ', error)
-      setError(error)
+      props.setErrors(error)
     }
   }
 
@@ -66,9 +65,6 @@ export function Install() {
       </Show>
       <Show when={unzipPercent() > 0 && unzipPercent() < 100}>
         <InstallProgress progress={unzipPercent()} title='Installing' />
-      </Show>
-      <Show when={error()}>
-        <p>{error()}</p>
       </Show>
     </>
   )

@@ -1,15 +1,11 @@
 import { Show, onCleanup, createSignal, onMount } from 'solid-js'
-import {
-  checkUpdate,
-  installUpdate,
-  onUpdaterEvent,
-} from '@tauri-apps/api/updater'
+import { checkUpdate, installUpdate } from '@tauri-apps/api/updater'
 import { relaunch } from '@tauri-apps/api/process'
 import { listen } from '@tauri-apps/api/event'
 import { InstallProgress } from './InstallProgress'
 import '../../styles/components/tauri/update.css'
 
-export function Update() {
+export function Update(props) {
   let updateProgress = 0
 
   const [update, setUpdate] = createSignal()
@@ -21,15 +17,11 @@ export function Update() {
 
   const handleUpdate = async () => {
     try {
-      console.log(
-        `Installing update ${update().manifest?.version}, ${
-          update().manifest?.date
-        }, ${update().manifest.body}`,
-      )
       await installUpdate()
       await relaunch()
     } catch (error) {
       console.error(error)
+      props.setErrors(error)
     }
   }
 
