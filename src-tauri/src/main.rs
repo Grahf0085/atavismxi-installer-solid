@@ -59,7 +59,7 @@ fn is_wine_installed() -> bool {
         output.map_or(false, |o| o.status.success())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 fn run_wine(installed_dir: &str, player_name: String) -> String {
 
     let password = match get_password(player_name.clone()) {
