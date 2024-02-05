@@ -13,8 +13,8 @@ export function Install() {
   const [loading, setLoading] = createSignal(false)
 
   const storageEventListener = () => {
-    setDownloadPercent(window.sessionStorage.getItem('download-percent'))
-    setUnzipPercent(window.sessionStorage.getItem('unzip-percent'))
+    setDownloadPercent(window.sessionStorage.getItem('download-percent') || 0)
+    setUnzipPercent(window.sessionStorage.getItem('unzip-percent') || 0)
   }
 
   const installGame = async () => {
@@ -24,7 +24,6 @@ export function Install() {
         setLoading(true)
         await downloadGame()
         await unzipGame()
-        window.location.reload(true)
       }
     } catch (error) {
       console.error('Error During Installation: ', error)
@@ -45,7 +44,7 @@ export function Install() {
       <Show
         when={
           (downloadPercent() === 0 && unzipPercent() === 0) ||
-          (downloadPercent() === 100 && unzipPercent() === 100)
+          (downloadPercent() >= 100 && unzipPercent() >= 100)
         }
       >
         <button class='installButton' onClick={installGame}>

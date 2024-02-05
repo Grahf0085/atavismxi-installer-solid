@@ -16,7 +16,7 @@ export function Update() {
   const [updatePercent, setUpdatePercent] = createSignal(0)
 
   const storageEventListener = () => {
-    setUpdatePercent(window.sessionStorage.getItem('update-percent'))
+    setUpdatePercent(window.sessionStorage.getItem('update-percent') || 0)
   }
 
   const handleUpdate = async () => {
