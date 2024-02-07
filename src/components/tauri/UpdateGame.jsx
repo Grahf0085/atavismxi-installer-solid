@@ -44,12 +44,13 @@ export function UpdateGame() {
         await unzipGameUpdate(
           atavismxiDir + DOWNLOAD_FOLDER + `/AtavismXI-${update.version}.zip`,
         )
-
-        window.location.reload(true)
+        setVersion(update.version)
       })
     } catch (error) {
       console.error('Error During Game Update: ', error)
       props.setErrors(error)
+    } finally {
+      setLoading(false)
     }
   }
 
