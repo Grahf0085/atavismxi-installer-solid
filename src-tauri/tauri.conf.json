@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "Atavism XI Launcher",
-    "version": "0.2.0"
+    "version": "0.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -37,7 +37,7 @@
       },
       "fs": {
         "all": false,
-        "readFile": false,
+        "readFile": true,
         "writeFile": false,
         "readDir": false,
         "copyFile": false,
@@ -50,9 +50,6 @@
       }
     },
     "bundle": {
-      "appimage": {
-        "bundleMediaFramework": true
-      },
       "active": true,
       "targets": "all",
       "identifier": "com.atavismxi.dev",
@@ -83,8 +80,8 @@
         "fullscreen": false,
         "resizable": true,
         "title": "Atavism XI Launcher",
-        "width": 800,
-        "height": 600
+        "width": 1536,
+        "height": 864
       }
     ]
   }

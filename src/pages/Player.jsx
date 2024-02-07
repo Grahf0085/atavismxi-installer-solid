@@ -4,6 +4,7 @@ import { Adventurer } from '../components/adventurer/Adventurer'
 import { Install } from '../components/tauri/Install'
 import { Play } from '../components/tauri/Play'
 import { Update } from '../components/tauri/Update'
+import { UpdateGame } from '../components/tauri/UpdateGame'
 import { fetchPlayerAdventurers } from '../../utils/search'
 import { getPlayer } from '../../utils/auth'
 import '../styles/pages/player.css'
@@ -87,6 +88,7 @@ export function Player() {
           errors={errors()}
           setErrors={setErrors}
         />
+        <UpdateGame setErrors={setErrors} />
         <button class='logoutButton' onClick={handleLogout}>
           Logout
         </button>
