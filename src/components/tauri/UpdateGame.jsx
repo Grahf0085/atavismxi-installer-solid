@@ -5,18 +5,15 @@ import {
   onMount,
   onCleanup,
 } from 'solid-js'
-import { readTextFile } from '@tauri-apps/api/fs'
 import { Store } from 'tauri-plugin-store-api'
 import {
   gameUpdatesAvailable,
   downloadGameUpdate,
   unzipGameUpdate,
+  readGameVersion,
 } from '../../../utils/install/updateGame'
 import Loader2 from '../../../node_modules/lucide-solid/dist/source/icons/loader-2'
-import { GAME_FOLDER, DOWNLOAD_FOLDER } from '../../../utils/consts'
-
-//for each item in array use download link to download zip
-//extract zip to game folder - should overwrite files already there
+import { DOWNLOAD_FOLDER } from '../../../utils/consts'
 
 export function UpdateGame() {
   const store = new Store('.settings.dat')
@@ -57,14 +54,9 @@ export function UpdateGame() {
   onMount(async () => {
     window.addEventListener('storage', storageEventListener)
 
-    const versionLocation =
-      (await store.get('atavismxi-dir')) + GAME_FOLDER + '/version.json'
-
-    const versionString = await readTextFile(versionLocation)
-    const versionObj = JSON.parse(versionString)
-    const versionValue = versionObj.version
-
-    setVersion(versionValue)
+    const installedDir = await store.get('atavismxi-dir')
+    const gameVersion = readGameVersion(installedDir)
+    setVersion(gameVersion)
   })
 
   onCleanup(() => {

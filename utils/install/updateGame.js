@@ -1,6 +1,7 @@
 import { download } from 'tauri-plugin-upload-api'
 import { Store } from 'tauri-plugin-store-api'
 import { invoke } from '@tauri-apps/api/tauri'
+import { readTextFile } from '@tauri-apps/api/fs'
 import { DOWNLOAD_FOLDER, GAME_FOLDER } from '../consts'
 
 const store = new Store('.settings.dat')
@@ -57,4 +58,14 @@ export const unzipGameUpdate = async (archivePath) => {
     console.error('Error unzipping game update: ', error)
     return error
   }
+}
+
+export const readGameVersion = async (installedDir) => {
+  const versionLocation = installedDir + GAME_FOLDER + '/version.json'
+
+  const versionString = await readTextFile(versionLocation)
+  const versionObj = JSON.parse(versionString)
+  const versionValue = versionObj.version
+
+  return versionValue
 }
