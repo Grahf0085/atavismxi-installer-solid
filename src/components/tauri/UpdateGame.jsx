@@ -15,6 +15,7 @@ import {
 import Loader2 from '../../../node_modules/lucide-solid/dist/source/icons/loader-2'
 import { DOWNLOAD_FOLDER } from '../../../utils/consts'
 
+/* code for showing percent of update isn't really used */
 export function UpdateGame() {
   const store = new Store('.settings.dat')
 
@@ -55,7 +56,7 @@ export function UpdateGame() {
     window.addEventListener('storage', storageEventListener)
 
     const installedDir = await store.get('atavismxi-dir')
-    const gameVersion = readGameVersion(installedDir)
+    const gameVersion = await readGameVersion(installedDir)
     setVersion(gameVersion)
   })
 
