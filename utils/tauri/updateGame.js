@@ -61,11 +61,15 @@ export const unzipGameUpdate = async (archivePath) => {
 }
 
 export const readGameVersion = async (installedDir) => {
-  const versionLocation = installedDir + GAME_FOLDER + '/version.json'
+  try {
+    const versionLocation = installedDir + GAME_FOLDER + '/version.json'
 
-  const versionString = await readTextFile(versionLocation)
-  const versionObj = JSON.parse(versionString)
-  const versionValue = versionObj.version
+    const versionString = await readTextFile(versionLocation)
+    const versionObj = JSON.parse(versionString)
+    const versionValue = versionObj.version
 
-  return versionValue
+    return versionValue
+  } catch (error) {
+    return 'Not Installed'
+  }
 }

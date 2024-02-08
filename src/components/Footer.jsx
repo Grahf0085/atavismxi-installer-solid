@@ -25,14 +25,16 @@ export function Footer() {
     const gameVersion = await readGameVersion(installedDir)
     setGameVersion(gameVersion)
 
-    stopWatching = await watch(
-      installedDir + GAME_FOLDER + '/version.json',
-      async (event) => {
-        const gameVersion = await readGameVersion(installedDir)
-        setGameVersion(gameVersion)
-      },
-      { recursive: true },
-    )
+    if (gameVersion !== 'Not Installed') {
+      stopWatching = await watch(
+        installedDir + GAME_FOLDER + '/version.json',
+        async (event) => {
+          const gameVersion = await readGameVersion(installedDir)
+          setGameVersion(gameVersion)
+        },
+        { recursive: true },
+      )
+    }
   })
 
   onCleanup(() => {
