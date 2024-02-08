@@ -4,7 +4,7 @@ import { Store } from 'tauri-plugin-store-api'
 import { watch } from 'tauri-plugin-fs-watch-api'
 import Gitlab from '../../node_modules/lucide-solid/dist/source/icons/gitlab'
 import Cloud from '../../node_modules/lucide-solid/dist/source/icons/cloud'
-import { readGameVersion } from '../../utils/install/updateGame'
+import { readGameVersion } from '../../utils/tauri/updateGame'
 import { GAME_FOLDER } from '../../utils/consts'
 import '../styles/components/footer.css'
 

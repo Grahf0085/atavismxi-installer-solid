@@ -11,7 +11,7 @@ import {
   downloadGameUpdate,
   unzipGameUpdate,
   readGameVersion,
-} from '../../../utils/install/updateGame'
+} from '../../../utils/tauri/updateGame'
 import Loader2 from '../../../node_modules/lucide-solid/dist/source/icons/loader-2'
 import { DOWNLOAD_FOLDER } from '../../../utils/consts'
 

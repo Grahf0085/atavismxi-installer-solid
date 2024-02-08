@@ -1,9 +1,11 @@
 import { Show, createSignal, onCleanup, onMount } from 'solid-js'
 import Loader2 from '../../../node_modules/lucide-solid/dist/source/icons/loader-2'
 import { InstallProgress } from './InstallProgress'
-import { pickLocationToInstall } from '../../../utils/install/pickLocation'
-import { downloadGame } from '../../../utils/install/downloadGame'
-import { unzipGame } from '../../../utils/install/unzipGame'
+import {
+  pickLocationToInstall,
+  downloadGame,
+  unzipGame,
+} from '../../../utils/tauri/installGame'
 import '../../styles/components/tauri/install.css'
 
 export function Install() {
@@ -25,8 +27,10 @@ export function Install() {
         await unzipGame()
       }
     } catch (error) {
-      console.error('Error During Installation: ', error)
+      console.error('Error During Game Installation: ', error)
       props.setErrors(error)
+    } finally {
+      setLoading(false)
     }
   }
 
