@@ -2,8 +2,7 @@ import { For, Show, createResource, createSignal, onMount } from 'solid-js'
 import { useNavigate } from '@solidjs/router'
 import { Adventurer } from '../components/adventurer/Adventurer'
 import { Install } from '../components/tauri/Install'
-import { Play } from '../components/tauri/Play'
-import { Update } from '../components/tauri/Update'
+import { UpdateLauncher } from '../components/tauri/UpdateLauncher'
 import { UpdateGame } from '../components/tauri/UpdateGame'
 import { fetchPlayerAdventurers } from '../../utils/search'
 import { getPlayer } from '../../utils/auth'
@@ -82,13 +81,12 @@ export function Player() {
       </Show>
       <div class='playerButtonContainer'>
         <Install setErrors={setErrors} />
-        <Update setErrors={setErrors} />
-        <Play
+        <UpdateLauncher setErrors={setErrors} />
+        <UpdateGame
           playerName={playerName()}
           errors={errors()}
           setErrors={setErrors}
         />
-        <UpdateGame setErrors={setErrors} />
         <button class='logoutButton' onClick={handleLogout}>
           Logout
         </button>

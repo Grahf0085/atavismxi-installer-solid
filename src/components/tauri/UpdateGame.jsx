@@ -14,9 +14,10 @@ import {
 } from '../../../utils/tauri/updateGame'
 import Loader2 from '../../../node_modules/lucide-solid/dist/source/icons/loader-2'
 import { DOWNLOAD_FOLDER } from '../../../utils/consts'
+import { Play } from './Play'
 
 /* code for showing percent of update isn't really used */
-export function UpdateGame() {
+export function UpdateGame(props) {
   const store = new Store('.settings.dat')
 
   const [version, setVersion] = createSignal(0)
@@ -75,6 +76,13 @@ export function UpdateGame() {
         <div class='loaderContainer'>
           <Loader2 size={40} class='lucideLoader' />
         </div>
+      </Show>
+      <Show when={updates()?.length === 0}>
+        <Play
+          playerName={props.playerName}
+          errors={props.errors}
+          setErrors={props.setErrors}
+        />
       </Show>
       {/* updates are very small right now so just showing spinner instead of progress bar */}
       {/* <Show when={updatePercent() > 0 && updatePercent() < 100}> */}

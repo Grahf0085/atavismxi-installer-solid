@@ -8,7 +8,7 @@ import {
 } from '../../../utils/tauri/installGame'
 import '../../styles/components/tauri/install.css'
 
-export function Install() {
+export function Install(props) {
   const [downloadPercent, setDownloadPercent] = createSignal(0)
   const [unzipPercent, setUnzipPercent] = createSignal(0)
   const [loading, setLoading] = createSignal(false)

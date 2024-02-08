@@ -5,7 +5,7 @@ import { listen } from '@tauri-apps/api/event'
 import { InstallProgress } from './InstallProgress'
 import '../../styles/components/tauri/update.css'
 
-export function Update(props) {
+export function UpdateLauncher(props) {
   let updateProgress = 0
 
   const [update, setUpdate] = createSignal()
