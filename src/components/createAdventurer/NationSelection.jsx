@@ -15,13 +15,13 @@ export function NationSelection(props) {
 
   return (
     <section class='creationContainer'>
-      <video
-        class='nationVideo'
-        src={videos[props.selectedNation]}
-        muted
-        loop
-        autoplay
-      />
+      {/* <video */}
+      {/*   class='nationVideo' */}
+      {/*   src={videos[props.selectedNation]} */}
+      {/*   muted */}
+      {/*   loop */}
+      {/*   autoplay */}
+      {/* /> */}
       <h2 class='creationTitle'>Select A Home</h2>
       <div class='nationSubContainer'>
         <ul class='nationEmblemContainer'>
