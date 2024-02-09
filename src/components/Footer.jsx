@@ -1,44 +1,18 @@
-import { createSignal, onCleanup, onMount } from 'solid-js'
+import { createSignal, onMount } from 'solid-js'
 import { getVersion } from '@tauri-apps/api/app'
-import { Store } from 'tauri-plugin-store-api'
-import { watch } from 'tauri-plugin-fs-watch-api'
 import Gitlab from '../../node_modules/lucide-solid/dist/source/icons/gitlab'
 import Cloud from '../../node_modules/lucide-solid/dist/source/icons/cloud'
-import { readGameVersion } from '../../utils/tauri/updateGame'
-import { GAME_FOLDER } from '../../utils/consts'
+import { createGameVersion } from '../providers/VersionProvider'
 import '../styles/components/footer.css'
 
 export function Footer() {
-  let stopWatching = () => {}
-
-  const store = new Store('.settings.dat')
+  const gameVersion = createGameVersion()
 
   const [launcherVersion, setLauncherVersion] = createSignal()
-  const [gameVersion, setGameVersion] = createSignal()
 
   onMount(async () => {
     const appVersion = await getVersion()
     setLauncherVersion(appVersion)
-
-    const installedDir = await store.get('atavismxi-dir')
-
-    const gameVersion = await readGameVersion(installedDir)
-    setGameVersion(gameVersion)
-
-    if (gameVersion !== 'Not Installed') {
-      stopWatching = await watch(
-        installedDir + GAME_FOLDER + '/version.json',
-        async (event) => {
-          const gameVersion = await readGameVersion(installedDir)
-          setGameVersion(gameVersion)
-        },
-        { recursive: true },
-      )
-    }
-  })
-
-  onCleanup(() => {
-    stopWatching()
   })
 
   return (

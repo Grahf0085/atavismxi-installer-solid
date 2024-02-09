@@ -6,12 +6,16 @@ import {
   downloadGame,
   unzipGame,
 } from '../../../utils/tauri/installGame'
+import { readGameVersion } from '../../../utils/tauri/updateGame'
+import { createSetGameVersion } from '../../providers/VersionProvider'
 import '../../styles/components/tauri/install.css'
 
 export function Install(props) {
   const [downloadPercent, setDownloadPercent] = createSignal(0)
   const [unzipPercent, setUnzipPercent] = createSignal(0)
   const [loading, setLoading] = createSignal(false)
+
+  const setGameVersion = createSetGameVersion()
 
   const storageEventListener = () => {
     setDownloadPercent(window.sessionStorage.getItem('download-percent') || 0)
@@ -25,6 +29,8 @@ export function Install(props) {
         setLoading(true)
         await downloadGame()
         await unzipGame()
+        const gameVersion = await readGameVersion()
+        setGameVersion(gameVersion)
       }
     } catch (error) {
       console.error('Error During Game Installation: ', error)

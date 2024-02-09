@@ -14,8 +14,8 @@ import { Auth } from './pages/Auth'
 import { Player } from './pages/Player'
 import { Account } from './pages/Account'
 import { CreateAdventurer } from './pages/CreateAdventurer'
-import './styles/global.css'
 import { NotFound } from './pages/NotFound'
+import './styles/global.css'
 
 render(
   () => (

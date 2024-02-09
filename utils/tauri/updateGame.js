@@ -5,9 +5,9 @@ import { readTextFile } from '@tauri-apps/api/fs'
 import { DOWNLOAD_FOLDER, GAME_FOLDER } from '../consts'
 
 const store = new Store('.settings.dat')
-const atavismxiDir = await store.get('atavismxi-dir')
 
 export const gameUpdatesAvailable = async (currentVersion) => {
+  if (currentVersion === 0) return []
   const response = await fetch(
     `https://www.atavismxi.com/api/update/${currentVersion}`,
   )
@@ -21,6 +21,8 @@ export const gameUpdatesAvailable = async (currentVersion) => {
 
 export const downloadGameUpdate = async (updateSource, version) => {
   try {
+    const atavismxiDir = await store.get('atavismxi-dir')
+
     let downloadProgress = 0
     let destination =
       atavismxiDir + DOWNLOAD_FOLDER + `/AtavismXI-${version}.zip`
@@ -50,6 +52,8 @@ export const downloadGameUpdate = async (updateSource, version) => {
 
 export const unzipGameUpdate = async (archivePath) => {
   try {
+    const atavismxiDir = await store.get('atavismxi-dir')
+
     await invoke('unzip_archive', {
       archivePath: archivePath,
       targetDir: atavismxiDir + GAME_FOLDER,
@@ -60,9 +64,11 @@ export const unzipGameUpdate = async (archivePath) => {
   }
 }
 
-export const readGameVersion = async (installedDir) => {
+export const readGameVersion = async () => {
   try {
-    const versionLocation = installedDir + GAME_FOLDER + '/version.json'
+    const atavismxiDir = await store.get('atavismxi-dir')
+
+    const versionLocation = atavismxiDir + GAME_FOLDER + '/version.json'
 
     const versionString = await readTextFile(versionLocation)
     const versionObj = JSON.parse(versionString)
@@ -70,6 +76,6 @@ export const readGameVersion = async (installedDir) => {
 
     return versionValue
   } catch (error) {
-    return 'Not Installed'
+    return 0
   }
 }

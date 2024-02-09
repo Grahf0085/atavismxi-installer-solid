@@ -10,19 +10,24 @@ import {
   gameUpdatesAvailable,
   downloadGameUpdate,
   unzipGameUpdate,
-  readGameVersion,
 } from '../../../utils/tauri/updateGame'
+import {
+  createGameVersion,
+  createSetGameVersion,
+} from '../../providers/VersionProvider'
 import Loader2 from '../../../node_modules/lucide-solid/dist/source/icons/loader-2'
 import { DOWNLOAD_FOLDER } from '../../../utils/consts'
 import { Play } from './Play'
 
-/* code for showing percent of update isn't really used */
+/* code for showing percent of update isn't really used - updates are too small */
 export function UpdateGame(props) {
   const store = new Store('.settings.dat')
 
-  const [version, setVersion] = createSignal(0)
   const [updatePercent, setUpdatePercent] = createSignal()
   const [loading, setLoading] = createSignal(false)
+
+  const version = createGameVersion()
+  const setVersion = createSetGameVersion()
 
   const [updates] = createResource(version, gameUpdatesAvailable)
 
@@ -55,10 +60,6 @@ export function UpdateGame(props) {
 
   onMount(async () => {
     window.addEventListener('storage', storageEventListener)
-
-    const installedDir = await store.get('atavismxi-dir')
-    const gameVersion = await readGameVersion(installedDir)
-    setVersion(gameVersion)
   })
 
   onCleanup(() => {
