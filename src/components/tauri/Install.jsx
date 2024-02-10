@@ -28,6 +28,7 @@ export function Install(props) {
       if (locationPicked) {
         setLoading(true)
         await downloadGame()
+        setLoading(false)
         await unzipGame()
         const gameVersion = await readGameVersion()
         setGameVersion(gameVersion)

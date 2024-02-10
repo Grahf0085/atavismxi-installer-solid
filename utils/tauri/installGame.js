@@ -2,8 +2,8 @@ import { open } from '@tauri-apps/api/dialog'
 import { createDir, exists } from '@tauri-apps/api/fs'
 import { Store } from 'tauri-plugin-store-api'
 import { download } from 'tauri-plugin-upload-api'
+import { listen } from '@tauri-apps/api/event'
 import { invoke } from '@tauri-apps/api/tauri'
-import { watch } from 'tauri-plugin-fs-watch-api'
 import { DOWNLOAD_FOLDER, GAME_FOLDER } from '../consts'
 
 const store = new Store('.settings.dat')
@@ -84,8 +84,9 @@ export const downloadGame = async () => {
       const zipFileSize = await invoke('get_file_size', {
         targetFile: atavismxiDir + DOWNLOAD_FOLDER + '/AtavismXI.zip',
       })
-      /* number from total of download() function */
-      if (zipFileSize !== 8138183360) {
+
+      /* number from total of download() function and should be updated if AtavismXI.zip changes */
+      if (zipFileSize !== 8137766366) {
         await downloadZip(atavismxiDir + DOWNLOAD_FOLDER + '/AtavismXI.zip')
       }
     }
@@ -96,28 +97,21 @@ export const downloadGame = async () => {
 }
 
 export const unzipGame = async () => {
-  const store = new Store('.settings.dat')
   const atavismxiDir = await store.get('atavismxi-dir')
 
-  const unzipWatcher = await watch(
-    atavismxiDir + GAME_FOLDER,
-    async (event) => {
-      const size = await invoke('get_folder_size', {
-        targetDir: atavismxiDir + GAME_FOLDER,
-      })
-
-      /* I don't know about this total number */
-      const unzipPercent = Math.ceil((size / 15221073625) * 100)
-      window.sessionStorage.setItem('unzip-percent', unzipPercent)
-      window.dispatchEvent(new Event('storage'))
-    },
-    { recursive: true },
-  )
-
-  await invoke('unzip_archive', {
-    archivePath: atavismxiDir + DOWNLOAD_FOLDER + '/AtavismXI.zip',
-    targetDir: atavismxiDir + GAME_FOLDER,
+  const unlisten = await listen('unzip', (event) => {
+    const unzipPercent = Math.round(
+      (event.payload.files_unzipped / event.payload.archive_len) * 100,
+    )
+    window.sessionStorage.setItem('unzip-percent', unzipPercent)
+    window.dispatchEvent(new Event('storage'))
   })
 
-  unzipWatcher()
+  await invoke('unzip', {
+    source: atavismxiDir + DOWNLOAD_FOLDER + '/AtavismXI.zip',
+    target: atavismxiDir + GAME_FOLDER,
+    debug: false,
+  })
+
+  unlisten()
 }

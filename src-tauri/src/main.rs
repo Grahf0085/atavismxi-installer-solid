@@ -1,10 +1,108 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::{fs::File, fs::metadata, process::Command};
-use fs_extra::dir::get_size;
+use std::{fs::File, fs::create_dir_all, fs::metadata, process::Command};
+
+use std::io;
+use std::path::Path;
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Clone)]
+pub struct ZipUnzipEvent {
+    path: String,
+    error: bool,
+    message: String,
+    archive_len: usize,
+    files_unzipped: usize
+}
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+
+#[tauri::command]
+async fn unzip(window: tauri::Window, source: String, target: String, debug: bool) -> Result<(), String> {
+  let source_path = Path::new(&source);
+    let target_path = Path::new(&target);
+
+    let _ = window.emit("unzip", ZipUnzipEvent {
+        error: false,
+        message: format!("Trying to unzip {}", &source),
+        path: source.to_string(),
+        archive_len: 0,
+        files_unzipped: 0
+    });
+
+    let file = match File::open(&source_path) {
+        Ok(file) => file,
+        Err(err) => {
+            let _ = window.emit("unzip", ZipUnzipEvent {
+                error: true,
+                path: source,
+                message: format!("Failed to open zip file, {}", err),
+                archive_len: 0,
+                files_unzipped: 0
+            });
+
+            return Err(format!("Failed to open zip file: {}", err));
+        }
+    };
+
+    let mut archive = match zip::ZipArchive::new(file) {
+        Ok(archive) => archive,
+        Err(err) => return Err(format!("Failed to read zip file: {}", err)),
+    };
+
+    let archive_length = archive.len();
+    let mut files_unzipped = 0;
+
+    for i in 0..archive.len() {
+        let mut file = match archive.by_index(i) {
+            Ok(file) => file,
+            Err(err) => return Err(format!("Failed to read file in zip: {}", err)),
+        };
+
+        let outpath = match file.enclosed_name() {
+            Some(path) => target_path.join(path),
+            None => continue,
+        };
+
+        if let Some(parent_dir) = outpath.parent() {
+            if !parent_dir.exists() {
+                create_dir_all(parent_dir).unwrap();
+            }
+        }
+
+        if file.is_dir() {
+            if debug {
+                println!("Directory {} extracted to \"{}\"", i, outpath.display());
+            }
+            create_dir_all(&outpath).unwrap();
+        } else {
+            if debug {
+                println!(
+                    "File {} extracted to \"{}\" ({} bytes)",
+                    i,
+                    outpath.display(),
+                    file.size()
+                );
+            }
+            let mut outfile = File::create(&outpath).unwrap();
+            io::copy(&mut file, &mut outfile).unwrap();
+
+            let _ = window.emit("unzip", ZipUnzipEvent {
+                path: outpath.display().to_string(),
+                error: false,
+                message: format!("Processed {}", file.name()),
+                archive_len: archive_length,
+                files_unzipped
+            });
+        }
+
+        files_unzipped += 1;
+    }
+
+    Ok(())
+}
+
 
 #[tauri::command]
 fn get_file_size(target_file: String) -> Result<u64, String> {
@@ -12,21 +110,6 @@ fn get_file_size(target_file: String) -> Result<u64, String> {
         Ok(metadata) => Ok(metadata.len()),
         Err(err) => Err(format!("Error getting file metadata: {}", err))
     }
-}
-
-#[tauri::command]
-fn get_folder_size(target_dir: String) -> Result<u64, String>{
-  let folder_size = get_size(target_dir).unwrap();
-  Ok(folder_size)
-}
-
-#[tauri::command]
-async fn unzip_archive(archive_path: String, target_dir: String) -> Result<String, String> {
-  let _target_dir = std::path::PathBuf::from(target_dir.clone()); // Doesn't need to exist
-
-  zip_extract::extract(File::open(&archive_path).expect("Failed to open archive file"), &_target_dir, true).expect("Failed to extract archive");
-
-  Ok(target_dir)
 }
 
 #[tauri::command]
@@ -91,7 +174,7 @@ fn get_password(player: String) -> Result<String, String> {
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![unzip_archive, set_keyring, get_keyring, is_wine_installed, run_wine, get_folder_size, get_file_size])
+        .invoke_handler(tauri::generate_handler![unzip, set_keyring, get_keyring, is_wine_installed, run_wine, get_file_size])
         .plugin(tauri_plugin_fs_watch::init())
         .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_upload::init())

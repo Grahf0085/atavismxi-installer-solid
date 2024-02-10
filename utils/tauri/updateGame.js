@@ -54,9 +54,10 @@ export const unzipGameUpdate = async (archivePath) => {
   try {
     const atavismxiDir = await store.get('atavismxi-dir')
 
-    await invoke('unzip_archive', {
-      archivePath: archivePath,
-      targetDir: atavismxiDir + GAME_FOLDER,
+    await invoke('unzip', {
+      source: archivePath,
+      target: atavismxiDir + GAME_FOLDER,
+      debug: false,
     })
   } catch (error) {
     console.error('Error unzipping game update: ', error)
