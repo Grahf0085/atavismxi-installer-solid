@@ -22,8 +22,10 @@ export function Install(props) {
   const setGameVersion = createSetGameVersion()
 
   const storageEventListener = () => {
-    setDownloadPercent(window.sessionStorage.getItem('download-percent') || 0)
-    setUnzipPercent(window.sessionStorage.getItem('unzip-percent') || 0)
+    setDownloadPercent(
+      Number(window.sessionStorage.getItem('download-percent')) || 0,
+    )
+    setUnzipPercent(Number(window.sessionStorage.getItem('unzip-percent')) || 0)
   }
 
   const installGame = async () => {
@@ -32,7 +34,6 @@ export function Install(props) {
       if (locationPicked) {
         setLoading(true)
         await downloadGame()
-        setLoading(false)
         await unzipGame()
         const gameVersion = await readGameVersion()
         setGameVersion(gameVersion)
@@ -63,7 +64,8 @@ export function Install(props) {
       <Show
         when={
           (downloadPercent() === 0 && unzipPercent() === 0) ||
-          (downloadPercent() >= 100 && unzipPercent() >= 100)
+          ((downloadPercent() >= 100 || downloadPercent() === 0) &&
+            unzipPercent() >= 100)
         }
       >
         <button class='installButton' onClick={installGame}>
@@ -76,7 +78,10 @@ export function Install(props) {
       <Show
         when={
           (unzipPercent() < 1 && downloadPercent() >= 100) ||
-          (downloadPercent() < 1 && loading())
+          (downloadPercent() < 1 &&
+            loading() &&
+            unzipPercent() < 1 &&
+            loading())
         }
       >
         <div class='loaderContainer'>

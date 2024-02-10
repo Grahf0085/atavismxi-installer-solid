@@ -59,7 +59,7 @@ const downloadZip = async (destination) => {
     (progress, total) => {
       downloadProgress += progress
 
-      const calculatedPercentage = Math.round((downloadProgress / total) * 100)
+      const calculatedPercentage = Math.floor((downloadProgress / total) * 100)
 
       window.sessionStorage.setItem('download-percent', calculatedPercentage)
       window.dispatchEvent(new Event('storage'))
@@ -100,7 +100,7 @@ export const unzipGame = async () => {
   const atavismxiDir = await store.get('atavismxi-dir')
 
   const unlisten = await listen('unzip', (event) => {
-    const unzipPercent = Math.round(
+    const unzipPercent = Math.floor(
       (event.payload.files_unzipped / event.payload.archive_len) * 100,
     )
     window.sessionStorage.setItem('unzip-percent', unzipPercent)

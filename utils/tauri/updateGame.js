@@ -32,7 +32,7 @@ export const downloadGameUpdate = async (updateSource, version) => {
       destination,
       (progress, total) => {
         downloadProgress += progress
-        const calculatedPercentage = Math.round(
+        const calculatedPercentage = Math.floor(
           (downloadProgress / total) * 100,
         )
 

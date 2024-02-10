@@ -52,7 +52,6 @@ async fn unzip(window: tauri::Window, source: String, target: String, debug: boo
     };
 
     let archive_length = archive.len();
-    let mut files_unzipped = 0;
 
     for i in 0..archive.len() {
         let mut file = match archive.by_index(i) {
@@ -93,11 +92,9 @@ async fn unzip(window: tauri::Window, source: String, target: String, debug: boo
                 error: false,
                 message: format!("Processed {}", file.name()),
                 archive_len: archive_length,
-                files_unzipped
+                files_unzipped: i + 1
             });
         }
-
-        files_unzipped += 1;
     }
 
     Ok(())
