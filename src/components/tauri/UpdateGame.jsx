@@ -19,7 +19,7 @@ import Loader2 from '../../../node_modules/lucide-solid/dist/source/icons/loader
 import { DOWNLOAD_FOLDER } from '../../../utils/consts'
 import { Play } from './Play'
 
-/* code for showing percent of update isn't really used - updates are too small */
+/* code for showing percent of update isn't really used - updates are too small - just using spinner for now */
 export function UpdateGame(props) {
   const store = new Store('.settings.dat')
 
@@ -70,7 +70,7 @@ export function UpdateGame(props) {
     <>
       <Show when={updates()?.length > 0}>
         <button onClick={handleUpdates} class='updateButton'>
-          Update Game
+          Update Atavism XI
         </button>
       </Show>
       <Show when={loading()}>
