@@ -1,4 +1,5 @@
 import { Show, createSignal, onCleanup, onMount } from 'solid-js'
+import { onUpdaterEvent } from '@tauri-apps/api/updater'
 import Loader2 from '../../../node_modules/lucide-solid/dist/source/icons/loader-2'
 import { InstallProgress } from './InstallProgress'
 import {
@@ -11,9 +12,12 @@ import { createSetGameVersion } from '../../providers/VersionProvider'
 import '../../styles/components/tauri/install.css'
 
 export function Install(props) {
+  let unlisten = () => {}
+
   const [downloadPercent, setDownloadPercent] = createSignal(0)
   const [unzipPercent, setUnzipPercent] = createSignal(0)
   const [loading, setLoading] = createSignal(false)
+  const [launcherUpdating, setLauncherUpdating] = createSignal(false)
 
   const setGameVersion = createSetGameVersion()
 
@@ -41,16 +45,21 @@ export function Install(props) {
     }
   }
 
-  onMount(() => {
+  onMount(async () => {
     window.addEventListener('storage', storageEventListener)
 
-    onCleanup(() => {
-      window.removeEventListener('storage', storageEventListener)
+    unlisten = await onUpdaterEvent(({ error, status }) => {
+      setLauncherUpdating(true)
     })
   })
 
+  onCleanup(() => {
+    window.removeEventListener('storage', storageEventListener)
+    unlisten()
+  })
+
   return (
-    <>
+    <Show when={!launcherUpdating()}>
       <Show
         when={
           (downloadPercent() === 0 && unzipPercent() === 0) ||
@@ -77,6 +86,6 @@ export function Install(props) {
       <Show when={unzipPercent() > 0 && unzipPercent() < 100}>
         <InstallProgress progress={unzipPercent()} title='Installing' />
       </Show>
-    </>
+    </Show>
   )
 }

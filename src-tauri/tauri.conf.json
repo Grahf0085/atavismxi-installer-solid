@@ -22,11 +22,6 @@
       "os": {
         "all": true
       },
-      "http": {
-        "all": true,
-        "request": true,
-        "scope": ["https://www.atavismxi.com/**"]
-      },
       "dialog": {
         "all": false,
         "ask": false,
