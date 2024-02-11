@@ -57,7 +57,7 @@ export function Play(props) {
   }
 
   const storageEventListener = () => {
-    setUnzipPercent(window.sessionStorage.getItem('unzip-percent') || 0)
+    setUnzipPercent(Number(window.sessionStorage.getItem('unzip-percent')) || 0)
   }
 
   onMount(async () => {

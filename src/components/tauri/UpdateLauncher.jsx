@@ -16,7 +16,9 @@ export function UpdateLauncher(props) {
   const [installingGame, setInstallingGame] = createSignal(false)
 
   const storageEventListener = () => {
-    setUpdatePercent(window.sessionStorage.getItem('update-percent') || 0)
+    setUpdatePercent(
+      Number(window.sessionStorage.getItem('update-percent')) || 0,
+    )
   }
 
   const handleUpdate = async () => {

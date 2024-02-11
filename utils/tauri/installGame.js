@@ -52,20 +52,27 @@ export const pickLocationToInstall = async () => {
 }
 
 const downloadZip = async (destination) => {
-  let downloadProgress = 0
-  await download(
-    'https://www.atavismxi.com/download/AtavismXI-1.0.zip',
-    destination,
-    (progress, total) => {
-      downloadProgress += progress
+  try {
+    let downloadProgress = 0
+    await download(
+      'https://www.atavismxi.com/download/AtavismXI-1.0.zip',
+      destination,
+      (progress, total) => {
+        downloadProgress += progress
 
-      const calculatedPercentage = Math.floor((downloadProgress / total) * 100)
+        const calculatedPercentage = Math.floor(
+          (downloadProgress / total) * 100,
+        )
 
-      window.sessionStorage.setItem('download-percent', calculatedPercentage)
-      window.dispatchEvent(new Event('storage'))
-    }, // a callback that will be called with the download progress
-    { 'Content-Type': 'text/plain' }, // optional headers to send with the request
-  )
+        window.sessionStorage.setItem('download-percent', calculatedPercentage)
+        window.dispatchEvent(new Event('storage'))
+      }, // a callback that will be called with the download progress
+      { 'Content-Type': 'text/plain' }, // optional headers to send with the request
+    )
+  } catch (error) {
+    console.error('Error downloading game zip file: ', error)
+    return error
+  }
 }
 
 export const downloadGame = async () => {
@@ -97,21 +104,26 @@ export const downloadGame = async () => {
 }
 
 export const unzipGame = async () => {
-  const atavismxiDir = await store.get('atavismxi-dir')
+  try {
+    const atavismxiDir = await store.get('atavismxi-dir')
 
-  const unlisten = await listen('unzip', (event) => {
-    const unzipPercent = Math.floor(
-      (event.payload.files_unzipped / event.payload.archive_len) * 100,
-    )
-    window.sessionStorage.setItem('unzip-percent', unzipPercent)
-    window.dispatchEvent(new Event('storage'))
-  })
+    const unlisten = await listen('unzip', (event) => {
+      const unzipPercent = Math.floor(
+        (event.payload.files_unzipped / event.payload.archive_len) * 100,
+      )
+      window.sessionStorage.setItem('unzip-percent', unzipPercent)
+      window.dispatchEvent(new Event('storage'))
+    })
 
-  await invoke('unzip', {
-    source: atavismxiDir + DOWNLOAD_FOLDER + '/AtavismXI.zip',
-    target: atavismxiDir + GAME_FOLDER,
-    debug: false,
-  })
+    await invoke('unzip', {
+      source: atavismxiDir + DOWNLOAD_FOLDER + '/AtavismXI.zip',
+      target: atavismxiDir + GAME_FOLDER,
+      debug: false,
+    })
 
-  unlisten()
+    unlisten()
+  } catch (error) {
+    console.error('Error unzipping game: ', error)
+    return error
+  }
 }

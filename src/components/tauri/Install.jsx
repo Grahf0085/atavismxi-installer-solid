@@ -25,6 +25,7 @@ export function Install(props) {
     setDownloadPercent(
       Number(window.sessionStorage.getItem('download-percent')) || 0,
     )
+
     setUnzipPercent(Number(window.sessionStorage.getItem('unzip-percent')) || 0)
   }
 

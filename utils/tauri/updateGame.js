@@ -2,6 +2,7 @@ import { download } from 'tauri-plugin-upload-api'
 import { Store } from 'tauri-plugin-store-api'
 import { invoke } from '@tauri-apps/api/tauri'
 import { readTextFile } from '@tauri-apps/api/fs'
+import { listen } from '@tauri-apps/api/event'
 import { DOWNLOAD_FOLDER, GAME_FOLDER } from '../consts'
 
 const store = new Store('.settings.dat')
@@ -54,11 +55,21 @@ export const unzipGameUpdate = async (archivePath) => {
   try {
     const atavismxiDir = await store.get('atavismxi-dir')
 
+    const unlisten = await listen('unzip', (event) => {
+      const unzipPercent = Math.floor(
+        (event.payload.files_unzipped / event.payload.archive_len) * 100,
+      )
+      window.sessionStorage.setItem('update-unzip-percent', unzipPercent)
+      window.dispatchEvent(new Event('storage'))
+    })
+
     await invoke('unzip', {
       source: archivePath,
       target: atavismxiDir + GAME_FOLDER,
       debug: false,
     })
+
+    unlisten()
   } catch (error) {
     console.error('Error unzipping game update: ', error)
     return error

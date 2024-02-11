@@ -23,7 +23,8 @@ import { Play } from './Play'
 export function UpdateGame(props) {
   const store = new Store('.settings.dat')
 
-  const [updatePercent, setUpdatePercent] = createSignal()
+  const [downloadPercent, setDownloadPercent] = createSignal()
+  const [unzipPercent, setUnzipPercent] = createSignal()
   const [loading, setLoading] = createSignal(false)
 
   const version = createGameVersion()
@@ -32,8 +33,12 @@ export function UpdateGame(props) {
   const [updates] = createResource(version, gameUpdatesAvailable)
 
   const storageEventListener = () => {
-    setUpdatePercent(
-      window.sessionStorage.getItem('update-download-percent') || 0,
+    setDownloadPercent(
+      Number(window.sessionStorage.getItem('update-download-percent')) || 0,
+    )
+
+    setUnzipPercent(
+      Number(window.sessionStorage.getItem('update-unzip-percent')) || 0,
     )
   }
 
@@ -58,7 +63,7 @@ export function UpdateGame(props) {
     }
   }
 
-  onMount(async () => {
+  onMount(() => {
     window.addEventListener('storage', storageEventListener)
   })
 
