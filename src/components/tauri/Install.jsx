@@ -51,7 +51,9 @@ export function Install(props) {
     window.addEventListener('storage', storageEventListener)
 
     unlisten = await onUpdaterEvent(({ error, status }) => {
-      setLauncherUpdating(true)
+      if (status === 'PENDING' || status === 'DOWNLOADED') {
+        setLauncherUpdating(true)
+      } else setLauncherUpdating(false)
     })
   })
 
@@ -61,7 +63,7 @@ export function Install(props) {
   })
 
   return (
-    <>
+    <Show when={!launcherUpdating()}>
       <Show
         when={
           (downloadPercent() === 0 && unzipPercent() === 0) ||
@@ -92,6 +94,6 @@ export function Install(props) {
       <Show when={unzipPercent() > 0 && unzipPercent() < 100}>
         <InstallProgress progress={unzipPercent()} title='Installing' />
       </Show>
-    </>
+    </Show>
   )
 }
