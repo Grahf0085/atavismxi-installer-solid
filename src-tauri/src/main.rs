@@ -18,6 +18,7 @@ pub struct ZipUnzipEvent {
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
+// unzip function written by: github.com/skitsanos
 #[tauri::command]
 async fn unzip(window: tauri::Window, source: String, target: String, debug: bool) -> Result<(), String> {
   let source_path = Path::new(&source);
