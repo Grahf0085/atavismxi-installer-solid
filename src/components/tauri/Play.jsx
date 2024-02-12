@@ -32,19 +32,30 @@ export function Play(props) {
     return isWineInstalled
   }
 
-  const runWine = async () => {
+  const runAshita = async () => {
     const playerName = props.playerName
     const folderWithCli = (await store.get('atavismxi-dir')) + GAME_FOLDER
 
-    await invoke('run_wine', {
-      installedDir: folderWithCli,
-      playerName,
-    })
+    if (currentOs() === 'Linux') {
+      const isWineInstalled = await checkForWine()
+
+      if (isWineInstalled) {
+        await invoke('run_wine', {
+          installedDir: folderWithCli,
+          playerName,
+        })
+      }
+    }
+
+    if (currentOs() === 'Windows_NT') {
+      await invoke('run_ashita_windows', {
+        installedDir: folderWithCli,
+        playerName,
+      })
+    }
   }
 
   const runGame = async () => {
-    const isWineInstalled = await checkForWine()
-
     if (!cliExists() && !props.errors.includes("Can't Locate Ashita-cli.exe"))
       props.setErrors([...props.errors, "Can't Locate Ashita-cli.exe"])
 
@@ -53,7 +64,7 @@ export function Play(props) {
         props.errors.filter((error) => error !== "Can't Locate Ashita-cli.exe"),
       )
 
-    if (isWineInstalled && cliExists()) runWine()
+    if (cliExists()) runAshita()
   }
 
   const storageEventListener = () => {
@@ -92,13 +103,7 @@ export function Play(props) {
   })
 
   return (
-    <Show
-      when={
-        currentOs() === 'Linux' &&
-        cliExists() &&
-        (unzipPercent() === 0 || unzipPercent() >= 100)
-      }
-    >
+    <Show when={cliExists() && (unzipPercent() === 0 || unzipPercent() >= 100)}>
       <button onClick={runGame} class='playButton'>
         Play Atavism XI
       </button>

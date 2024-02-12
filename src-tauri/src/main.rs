@@ -158,8 +158,29 @@ fn run_wine(installed_dir: &str, player_name: String) -> String {
         .arg(format!("{} {}", "--user", player_name))
         .arg(format!("{} {}", "--password", password))
         .output()
-        .expect("Failed to run Wine command");
+        .expect("Failed to run Ashita-cli");
 
+    String::from_utf8_lossy(&output.stdout).to_string()
+}
+
+#[tauri::command(async)]
+fn run_ashita_windows(installed_dir: &str, player_name: String) -> String {
+    let password = match get_password(player_name.clone()) {
+        Ok(p) => p,
+        Err(err) => {
+            eprintln!("Failed to get password from keyring: {}", err);
+            return "Error getting password from keyring".to_string();
+        }
+    };
+
+    let output = std::process::Command::new("Ashita-cli.exe")
+        .current_dir(installed_dir)
+        .arg("AtavismXI.ini")
+        .arg(format!("{} {}", "--user", player_name))
+        .arg(format!("{} {}", "--password", password))
+        .output()
+        .expect("Failed to run Ashita-cli");
+    
     String::from_utf8_lossy(&output.stdout).to_string()
 }
 
@@ -172,7 +193,7 @@ fn get_password(player: String) -> Result<String, String> {
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![unzip, set_keyring, get_keyring, is_wine_installed, run_wine, get_file_size])
+        .invoke_handler(tauri::generate_handler![run_ashita_windows, unzip, set_keyring, get_keyring, is_wine_installed, run_wine, get_file_size])
         .plugin(tauri_plugin_fs_watch::init())
         .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_upload::init())
