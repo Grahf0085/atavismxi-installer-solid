@@ -173,7 +173,7 @@ fn run_ashita_windows(installed_dir: &str, player_name: String) -> String {
         }
     };
 
-    let output = std::process::Command::new("Ashita-cli.exe")
+    let output = std::process::Command::new(r".\Ashita-cli.exe")
         .current_dir(installed_dir)
         .arg("AtavismXI.ini")
         .arg(format!("{} {}", "--user", player_name))
