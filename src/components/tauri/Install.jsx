@@ -53,6 +53,7 @@ export function Install(props) {
     unlisten = await onUpdaterEvent(({ error, status }) => {
       setLauncherUpdating(true)
     })
+    setLauncherUpdating(false)
   })
 
   onCleanup(() => {
