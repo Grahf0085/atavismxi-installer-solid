@@ -15,6 +15,7 @@ export function Play(props) {
   const [currentOs, setCurrentOs] = createSignal()
   const [unzipPercent, setUnzipPercent] = createSignal(0)
   const [cliExists, setCliExists] = createSignal(false)
+  const [test, setTest] = createSignal('not window')
 
   const checkForCli = async (cliPath) => {
     const cliExists = await exists(cliPath)
@@ -49,6 +50,7 @@ export function Play(props) {
       }
 
       if (currentOs() === 'Windows_NT') {
+        setTest('WINDOWS')
         await invoke('run_ashita_windows', {
           installedDir: folderWithCli,
           playerName,
@@ -108,10 +110,15 @@ export function Play(props) {
   })
 
   return (
-    <Show when={cliExists() && (unzipPercent() === 0 || unzipPercent() >= 100)}>
-      <button onClick={runGame} class='playButton'>
-        Play Atavism XI
-      </button>
-    </Show>
+    <>
+      TEST: {test()}
+      <Show
+        when={cliExists() && (unzipPercent() === 0 || unzipPercent() >= 100)}
+      >
+        <button onClick={runGame} class='playButton'>
+          Play Atavism XI
+        </button>
+      </Show>
+    </>
   )
 }
