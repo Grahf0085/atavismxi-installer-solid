@@ -33,25 +33,30 @@ export function Play(props) {
   }
 
   const runAshita = async () => {
-    const playerName = props.playerName
-    const folderWithCli = (await store.get('atavismxi-dir')) + GAME_FOLDER
+    try {
+      const playerName = props.playerName
+      const folderWithCli = (await store.get('atavismxi-dir')) + GAME_FOLDER
 
-    if (currentOs() === 'Linux') {
-      const isWineInstalled = await checkForWine()
+      if (currentOs() === 'Linux') {
+        const isWineInstalled = await checkForWine()
 
-      if (isWineInstalled) {
-        await invoke('run_wine', {
+        if (isWineInstalled) {
+          await invoke('run_wine', {
+            installedDir: folderWithCli,
+            playerName,
+          })
+        }
+      }
+
+      if (currentOs() === 'Windows_NT') {
+        await invoke('run_ashita_windows', {
           installedDir: folderWithCli,
           playerName,
         })
       }
-    }
-
-    if (currentOs() === 'Windows_NT') {
-      await invoke('run_ashita_windows', {
-        installedDir: folderWithCli,
-        playerName,
-      })
+    } catch (error) {
+      console.error('Error running ashita: ', error)
+      props.setErrors(error)
     }
   }
 
