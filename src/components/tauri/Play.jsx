@@ -15,6 +15,7 @@ export function Play(props) {
   const [currentOs, setCurrentOs] = createSignal()
   const [unzipPercent, setUnzipPercent] = createSignal(0)
   const [cliExists, setCliExists] = createSignal(false)
+  const [test, setTest] = createSignal('abc')
 
   const checkForCli = async (cliPath) => {
     const cliExists = await exists(cliPath)
@@ -36,6 +37,7 @@ export function Play(props) {
     try {
       const playerName = props.playerName
       const folderWithCli = (await store.get('atavismxi-dir')) + GAME_FOLDER
+      setTest(folderWithCli)
 
       if (currentOs() === 'Linux') {
         const isWineInstalled = await checkForWine()
@@ -109,7 +111,8 @@ export function Play(props) {
 
   return (
     <>
-      TEST: {currentOs()}
+      TEST: {test()}
+      <p>{cliExists() ? 'Cli Exists' : "Cli doesn't Exist"}</p>
       <Show
         when={cliExists() && (unzipPercent() === 0 || unzipPercent() >= 100)}
       >
