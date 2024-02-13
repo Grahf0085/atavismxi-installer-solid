@@ -180,8 +180,9 @@ fn run_ashita_windows(installed_dir: &str, player_name: String) -> Result<String
         }
     };
 
-    let output = std::process::Command::new(r".\Ashita-cli.exe")
+    let output = std::process::Command::new("powershell.exe")
         .current_dir(installed_dir)
+        .arg(r".\Ashita-cli.exe")
         .arg("AtavismXI.ini")
         .arg(format!("{} {}", "--user", player_name))
         .arg(format!("{} {}", "--password", password))
