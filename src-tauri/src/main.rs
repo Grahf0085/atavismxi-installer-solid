@@ -141,13 +141,13 @@ fn is_wine_installed() -> bool {
 }
 
 #[tauri::command(async)]
-fn run_wine(installed_dir: &str, player_name: String) -> String {
+fn run_wine(installed_dir: &str, player_name: String) -> Result<String, String> {
 
     let password = match get_password(player_name.clone()) {
         Ok(p) => p,
         Err(err) => {
             eprintln!("Failed to get password from keyring: {}", err);
-            return "Error getting password from keyring".to_string();
+            return Err("Error getting password from keyring".to_string());
         }
     };
 
@@ -158,18 +158,25 @@ fn run_wine(installed_dir: &str, player_name: String) -> String {
         .arg(format!("{} {}", "--user", player_name))
         .arg(format!("{} {}", "--password", password))
         .output()
-        .expect("Failed to run Ashita-cli");
+        .map_err(|e| format!("Failed to run Ashita-cli: {}", e))?;
 
-    String::from_utf8_lossy(&output.stdout).to_string()
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    let stderr = String::from_utf8_lossy(&output.stderr);
+
+    if !output.status.success() {
+        return Err(format!("Command failed with stderr: {}", stderr));
+    }
+
+    Ok(stdout.to_string())
 }
 
 #[tauri::command(async)]
-fn run_ashita_windows(installed_dir: &str, player_name: String) -> String {
+fn run_ashita_windows(installed_dir: &str, player_name: String) -> Result<String, String> {
     let password = match get_password(player_name.clone()) {
         Ok(p) => p,
         Err(err) => {
             eprintln!("Failed to get password from keyring: {}", err);
-            return "Error getting password from keyring".to_string();
+            return Err("Error getting password from keyring".to_string());
         }
     };
 
@@ -179,9 +186,16 @@ fn run_ashita_windows(installed_dir: &str, player_name: String) -> String {
         .arg(format!("{} {}", "--user", player_name))
         .arg(format!("{} {}", "--password", password))
         .output()
-        .expect("Failed to run Ashita-cli");
-    
-    String::from_utf8_lossy(&output.stdout).to_string()
+        .map_err(|e| format!("Failed to run Ashita-cli: {}", e))?;
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    let stderr = String::from_utf8_lossy(&output.stderr);
+
+    if !output.status.success() {
+        return Err(format!("Command failed with stderr: {}", stderr));
+    }
+
+    Ok(stdout.to_string())
 }
 
 fn get_password(player: String) -> Result<String, String> {
