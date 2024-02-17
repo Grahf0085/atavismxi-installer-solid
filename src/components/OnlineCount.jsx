@@ -1,8 +1,14 @@
-import { Show, createResource } from 'solid-js'
+import { Show, createResource, onCleanup } from 'solid-js'
 import { fetchOnline } from '../../utils/search'
 
 export function OnlineCount() {
-  const [numberOnline] = createResource(fetchOnline)
+  const [numberOnline, { refetch }] = createResource(fetchOnline)
+
+  const timer = setInterval(() => {
+    refetch()
+  }, 3000)
+
+  onCleanup(() => clearInterval(timer))
 
   return (
     <Show when={numberOnline()} fallback={<div>Loading Number Online</div>}>
@@ -10,8 +16,9 @@ export function OnlineCount() {
         <a href='/tools/adventurers'>
           {numberOnline().adventurersOnline.length} Online
         </a>
-        <Show when={numberOnline()?.errors}>
-          <p>{numberOnline().errors.errors}</p>
+        {/* this probably doesn't work */}
+        <Show when={numberOnline?.error}>
+          <p>{numberOnline.error.errors}</p>
         </Show>
       </div>
     </Show>
