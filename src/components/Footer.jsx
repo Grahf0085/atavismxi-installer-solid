@@ -46,6 +46,11 @@ export function Footer() {
             <Gitlab /> Server
           </span>
         </a>
+        <a href='https://gitlab.com/Grahf0085/atavismxiinstaller'>
+          <span>
+            <Gitlab /> Installer
+          </span>
+        </a>
         <a href='https://cloud.atavismxi.com'>
           <span>
             <Cloud /> Cloud
