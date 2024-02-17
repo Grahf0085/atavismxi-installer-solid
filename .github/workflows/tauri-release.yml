@@ -54,6 +54,6 @@ jobs:
         with:
           tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
           releaseName: 'Atavism XI Launcher v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-          releaseBody: 'change icon, fetch number online every three seconds, update footer'
+          releaseBody: 'use round icon, fix link in footer, and update about section'
           releaseDraft: true
           prerelease: true
