@@ -13,7 +13,7 @@ export function AboutItem(props) {
           <ChevronDownCircle class='downArrow' />
         </Show>
       </summary>
-      <p>{props.text}</p>
+      <p innerHTML={props.text} />
     </details>
   )
 }

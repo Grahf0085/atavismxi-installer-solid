@@ -53,8 +53,8 @@ export function About() {
       text: `We are not biased.`,
     },
     {
-      title: 'Level Sync: 10',
-      text: `Not ideal but low population so...`,
+      title: 'Level Sync Enabled',
+      text: `Not ideal but low population so... Similar to <a href="https://horizonffxi.wiki/Level_Sync">Horizons Level Sync.</a>`,
     },
     {
       title: 'No Global Yell',
@@ -69,8 +69,8 @@ export function About() {
       text: 'No more.',
     },
     {
-      title: 'One login per IP',
-      text: 'No more.',
+      title: 'Crafting Skillup',
+      text: 'Chance to skill up at 1.5x normal rate. Also applies to fishing.',
     },
     {
       title: 'Server Tech Info',
