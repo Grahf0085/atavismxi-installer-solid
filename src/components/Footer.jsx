@@ -1,6 +1,7 @@
 import { createSignal, onMount } from 'solid-js'
 import { getVersion } from '@tauri-apps/api/app'
 import Gitlab from '../../node_modules/lucide-solid/dist/source/icons/gitlab'
+import Github from '../../node_modules/lucide-solid/dist/source/icons/github'
 import Cloud from '../../node_modules/lucide-solid/dist/source/icons/cloud'
 import { createGameVersion } from '../providers/VersionProvider'
 import '../styles/components/footer.css'
@@ -46,9 +47,9 @@ export function Footer() {
             <Gitlab /> Server
           </span>
         </a>
-        <a href='https://gitlab.com/Grahf0085/atavismxiinstaller'>
+        <a href='https://github.com/Grahf0085/atavismxi-installer-solid'>
           <span>
-            <Gitlab /> Installer
+            <Github /> Installer
           </span>
         </a>
         <a href='https://cloud.atavismxi.com'>
