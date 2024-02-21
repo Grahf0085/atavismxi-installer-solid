@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "Atavism XI Launcher",
-    "version": "1.0.2"
+    "version": "1.1.0"
   },
   "tauri": {
     "allowlist": {
@@ -41,7 +41,7 @@
         "removeFile": false,
         "renameFile": false,
         "exists": true,
-        "scope": ["$HOME/**"]
+        "scope": ["/**"]
       }
     },
     "bundle": {
@@ -74,7 +74,7 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "Atavism XI Launcher",
+        "title": "AtavismXI",
         "width": 1536,
         "height": 864
       }
