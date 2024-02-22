@@ -54,6 +54,6 @@ jobs:
         with:
           tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
           releaseName: 'Atavism XI Launcher v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-          releaseBody: 'install game anywhere'
+          releaseBody: 'add progress bars to updater'
           releaseDraft: true
           prerelease: true

@@ -18,13 +18,13 @@ import {
 import Loader2 from '../../../node_modules/lucide-solid/dist/source/icons/loader-2'
 import { DOWNLOAD_FOLDER } from '../../../utils/consts'
 import { Play } from './Play'
+import { InstallProgress } from './InstallProgress'
 
-/* code for showing percent of update isn't really used - updates are too small - just using spinner for now */
 export function UpdateGame(props) {
   const store = new Store('.settings.dat')
 
-  const [downloadPercent, setDownloadPercent] = createSignal()
-  const [unzipPercent, setUnzipPercent] = createSignal()
+  const [downloadPercent, setDownloadPercent] = createSignal(0)
+  const [unzipPercent, setUnzipPercent] = createSignal(0)
   const [loading, setLoading] = createSignal(false)
 
   const version = createGameVersion()
@@ -46,20 +46,18 @@ export function UpdateGame(props) {
     const atavismxiDir = await store.get('atavismxi-dir')
 
     try {
-      setLoading(true)
-
-      updates().forEach(async (update) => {
+      await updates().forEach(async (update) => {
+        setLoading(true)
         await downloadGameUpdate(update.link, update.version)
         await unzipGameUpdate(
           atavismxiDir + DOWNLOAD_FOLDER + `/AtavismXI-${update.version}.zip`,
         )
+        setLoading(false)
         setVersion(update.version)
       })
     } catch (error) {
       console.error('Error During Game Update: ', error)
       props.setErrors(error)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -73,12 +71,23 @@ export function UpdateGame(props) {
 
   return (
     <>
-      <Show when={updates()?.length > 0}>
+      <Show
+        when={
+          updates()?.length > 0 &&
+          downloadPercent() === 0 &&
+          unzipPercent() === 0
+        }
+      >
         <button onClick={handleUpdates} class='updateButton'>
           Update Atavism XI
         </button>
       </Show>
-      <Show when={loading()}>
+      <Show
+        when={
+          (loading() && downloadPercent() === 0) ||
+          (downloadPercent() === 100 && unzipPercent() === 0)
+        }
+      >
         <div class='loaderContainer'>
           <Loader2 size={40} class='lucideLoader' />
         </div>
@@ -90,10 +99,12 @@ export function UpdateGame(props) {
           setErrors={props.setErrors}
         />
       </Show>
-      {/* updates are very small right now so just showing spinner instead of progress bar */}
-      {/* <Show when={updatePercent() > 0 && updatePercent() < 100}> */}
-      {/*   <InstallProgress progress={updatePercent()} title='Updating' /> */}
-      {/* </Show> */}
+      <Show when={downloadPercent() > 0 && downloadPercent() < 100}>
+        <InstallProgress progress={downloadPercent()} title='Downloading' />
+      </Show>
+      <Show when={unzipPercent() > 0 && unzipPercent() < 100}>
+        <InstallProgress progress={unzipPercent()} title='Unzipping' />
+      </Show>
     </>
   )
 }
