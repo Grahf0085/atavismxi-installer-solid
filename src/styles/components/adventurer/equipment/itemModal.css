@@ -10,7 +10,7 @@
   background: var(--quaternary-color);
   border-radius: var(--semiround);
   padding: 1rem;
-  width: 23rem;
+  width: max-content;
   z-index: 10;
 }
 
