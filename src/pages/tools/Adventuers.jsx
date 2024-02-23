@@ -32,8 +32,6 @@ export function Adventurers() {
     onCleanup(() => clearInterval(timer))
   })
 
-  onCleanup(() => clearInterval(timer))
-
   const { form, errors } = createForm({
     onSubmit: async (values) => {
       if (values.nameSearch === '') return []
