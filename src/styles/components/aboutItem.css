@@ -19,7 +19,6 @@ summary::-webkit-details-marker {
 .aboutDetails {
   background: var(--quaternary-color);
   width: 100%;
-  height: fit-content;
   border-radius: var(--semiround);
 }
 
