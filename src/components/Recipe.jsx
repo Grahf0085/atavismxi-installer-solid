@@ -5,6 +5,7 @@ export function Recipe(props) {
   const replaceUnderscores = (value) => value.replaceAll('_', ' ')
 
   const ingredientList = [
+    props.crystal,
     props.ingredientOne,
     props.ingredientTwo,
     props.ingredientThree,
